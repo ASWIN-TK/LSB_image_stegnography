@@ -1,0 +1,66 @@
+									LSB Image Steganography
+									-----------------------
+
+
+-> This project hides secret information inside a BMP image file using a method called least significant bit (LSB) steganography. It allows you to encode (hide) a secret file inside an image or decode (extract) the secret file back.
+
+-> There are two working modes: Encode (-e) and Decode (-d). All inputs are given through the command line when you run the program.
+
+
+
+Encoding Mode (-e): 
+-------------------
+
+Purpose: Hide a secret file inside a BMP image.
+
+Command format: ./a.out -e <cover_image.bmp> <secret_file> [output_image.bmp]
+
+	cover_image.bmp → The original BMP image used to hide data.
+
+	secret_file → The secret file to be hidden (it can be of any type such as .txt, .jpg, .pdf).
+
+	output_image.bmp (optional) → The new BMP file generated after hiding the data. If this is not given, the default encoded file name will be used.
+
+Steps performed while encoding:
+
+1) The user is asked to enter a magic string (like a secret key).
+
+2) This magic string is hidden inside the image to check authenticity later during decoding.
+
+3) The program hides information about the secret file’s extension (for example, .txt, .jpg, .pdf).
+
+4) The content of the secret file is encoded inside the image.
+
+5) Any unused data from the original BMP image is copied, so the new encoded image looks unchanged.
+
+Important Note:
+
+-> The image must be large enough to hide the secret file. The size is checked automatically.
+
+-> If the secret file is too big, the program will not proceed.
+
+
+
+
+
+Decoding Mode (-d):
+-------------------
+Purpose: Retrieve the hidden secret file from an encoded BMP image.
+
+Command format:./a.out -d <encoded_image.bmp> [output_file]
+
+	encoded_image.bmp → The BMP file that contains hidden data.
+
+	output_file (optional) → The name of the file to save extracted data. If the wrong extension is given, the program will automatically create a file with the correct extension.
+
+Steps performed while decoding:
+
+1) The user is asked to re-enter the magic string used during encoding.
+
+2) The program extracts the hidden magic string from the image and compares it with the one entered by the user.
+
+3) If they match → Decoding continues.
+
+4) If they do not match → The program stops, as the file is not authentic.
+
+5) The secret file is then retrieved and saved with the correct extension.
